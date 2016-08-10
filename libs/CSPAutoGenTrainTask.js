@@ -69,7 +69,7 @@ var TrainingTask = function(){
  
 	var startTrainingTask = function(){
 		console.log("start training task with training data directory: "+trainingSetDir);
-		console.log("                    with domain:"+domain);
+		console.log("                    with domain:"+domain+" evalscript extraction:"+enabledEvalScriptExtraction);
 		var trainingSet = loadTrainingSet();
 		var gasts = [];
 		var groups = {};     //hash -> [["","",...], ["","",...], ...]
@@ -78,6 +78,7 @@ var TrainingTask = function(){
 
 		// generate samples GAST.
 		for(var i in trainingSet){
+			console.log("start working on "+i+"/"+trainingSet.length+" training set.");
 			var script = trainingSet[i];
 			try{
 				var dataList = [];
