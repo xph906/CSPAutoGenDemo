@@ -14,7 +14,7 @@ var mkdirp = require('mkdirp');
 var config = {
 	baseTemplateDir : "templates",
 	baseNonmatchingScriptDir : "failedscripts",
-	enabledEvalScriptExtraction : true
+	enabledEvalScriptExtraction : false
 };
 
 /*
