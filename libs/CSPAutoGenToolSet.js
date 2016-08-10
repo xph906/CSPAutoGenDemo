@@ -50,14 +50,10 @@ var CSPAutoGenToolSet = function(){
 						if(values) 
 							values[dataCount] = node['CSPValue'];
 						dataCount++;
-						if(Array.isArray(node['CSPValue'])){
-							console.log("ATT is ARRAY: "+util.inspect(node));
-						}
+					
 						//console.log("DEBUG typeof: "+(typeof node['CSPValue']));
 					}
-					else if(subtype === null){
-						console.log("literalNode type is null!");
-					}
+					
 					//console.log(debugSpace+ "Literal:"+subtype+" "+node.value);      
 				}
 				else if(isIdentifierNode(node)){
@@ -116,7 +112,6 @@ var CSPAutoGenToolSet = function(){
 	      if(node.CSPTag === "regexp"){
 	      	var found = false;
 	      	var raw = node.raw;
-	      	console.log("RGEXP: "+raw+"==="+util.inspect(node));
 	      	var firstArg = raw.substr(1,raw.lastIndexOf('/')-1);
 	      	var secondArg = raw.substr(raw.lastIndexOf('/')+1);
 	      	for(var k in parent){
@@ -124,7 +119,7 @@ var CSPAutoGenToolSet = function(){
 	      			found = true;
 	      			parent[k] = genNewRegExpNode(firstArg, secondArg);
 	      			parent[k].CSPTag == "regexp";
-	      			console.log("ReplacedRegExpNode: "+util.inspect(parent[k]));
+	      			//console.log("ReplacedRegExpNode: "+util.inspect(parent[k]));
 	      		}
 	      	}
 	      	if(!found && parent['arguments']){
@@ -343,7 +338,7 @@ var CSPAutoGenToolSet = function(){
 		      if(template[i].type === "regexp"){
 		    	var tmp = template[i].value.toString();
 		    	template[i].value = new RegExp(template[i].value);
-		    	console.log("DEBUG recover regexp1: "+ template[i].value+" VS "+tmp);
+		    	//console.log("DEBUG recover regexp1: "+ template[i].value+" VS "+tmp);
 		      }
 		    }
 		    else if(typeof template[i].type === "object"){
@@ -351,7 +346,7 @@ var CSPAutoGenToolSet = function(){
 		        if (template[i].type[k] === "regexp"){
 		          var tmp = template[i].value[k].toString();
 		          template[i].value[k] = new RegExp(template[i].value[k]);
-		          console.log("DEBUG recover regexp2: "+ template[i].value[k]+" VS "+tmp);
+		          //console.log("DEBUG recover regexp2: "+ template[i].value[k]+" VS "+tmp);
 		        }
 		      }
 		    }
@@ -369,7 +364,7 @@ var CSPAutoGenToolSet = function(){
 		    	
 		    	var tmp = template[i].value.toString();
 		    	template[i].value = tmp.substr(1,tmp.length-2);
-		    	console.log("DEBUG regexp1: "+ template[i].value+" "+(typeof template[i].value ));
+		    	//console.log("DEBUG regexp1: "+ template[i].value+" "+(typeof template[i].value ));
 		      }
 		    }
 		    else if(typeof template[i].type === "object"){
@@ -378,7 +373,7 @@ var CSPAutoGenToolSet = function(){
 		          
 		          var tmp = template[i].value[k].toString();
 		          template[i].value[k] = tmp.substr(1,tmp.length-2);
-		          console.log("DEBUG regexp2: "+ template[i].value[k]+" "+(typeof template[i].value[k]));
+		          //console.log("DEBUG regexp2: "+ template[i].value[k]+" "+(typeof template[i].value[k]));
 		        }
 		      }
 		    }
@@ -393,7 +388,7 @@ var CSPAutoGenToolSet = function(){
 		try{
 			var logStream = fs.createWriteStream(filename);
 			fs.writeFileSync(filename, str, 'utf8');
-			console.log("storeTemplatesAsJSFile "+str.length);
+			console.log("storeTemplatesAsJSFile "+str.length+" bytes.");
 		}
 		catch(e){
 			console.log("error: failed to storeTemplatesAsJSFile to "+filename+": "+e);
@@ -412,7 +407,7 @@ var CSPAutoGenToolSet = function(){
   		try{
   			var logStream = fs.createWriteStream(filename);
 			fs.writeFileSync(filename, contents, 'utf8');
-			console.log("storeSymbolicTemplatesAsJSFile "+contents.length);
+			console.log("storeSymbolicTemplatesAsJSFile: "+contents.length+" bytes.");
 		}
 		catch(e){
 			console.log("error: storeSymbolicTemplatesAsJSFile failed.");
@@ -463,7 +458,7 @@ var CSPAutoGenToolSet = function(){
 						leave: function(node, parent){
 							if(node.regex){
 								var found = false;
-	      						console.log("LoadTemplates RGEXP: ==="+util.inspect(node.regex));
+	      						//console.log("LoadTemplates RGEXP: ==="+util.inspect(node.regex));
 	      						var firstArg = node.regex.pattern.toString();
 	      						var secondArg = node.regex.flags.toString();
 	      						for(var k in parent){
@@ -471,7 +466,7 @@ var CSPAutoGenToolSet = function(){
 	      								found = true;
 	      								parent[k] = genNewRegExpNode(firstArg, secondArg);
 	      								parent[k].CSPTag == "regexp";
-	      								console.log("ReplacedRegExpNode: "+util.inspect(parent[k]));
+	      								//console.log("ReplacedRegExpNode: "+util.inspect(parent[k]));
 	      							}
 	      							if(!found && parent['arguments']){
 	      								var callArgs = parent['arguments'];
@@ -524,8 +519,6 @@ var CSPAutoGenToolSet = function(){
 				enter: function(node){
 					if(node.CSPType && node.CSPType.type==="regexp"){
 						node.CSPType.value = new RegExp(node.CSPType.value);
-						console.log("loadTemplate: converted a regexp: "+ (node.CSPType.value instanceof RegExp)+
-							" "+node.CSPType.value.toString() );
 					}
 					else if(node.CSPType && node.CSPType.type !=null && 
 						(typeof node.CSPType.type)==="object"){
@@ -930,7 +923,7 @@ var CSPAutoGenToolSet = function(){
 		else if (node.type===esprima.Syntax.NewExpression &&
 			node.callee && 
 			node.callee.name==="RegExp" ) {
-			console.log("A RegExp Node!");
+			//console.log("A RegExp Node!");
 			return true;
 		}
 		return false;

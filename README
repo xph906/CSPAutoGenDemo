@@ -8,7 +8,7 @@ This project aims to demonstrate CSPAutoGen's functionality. It includes the ess
 		2. tar -zxvf ebay_testing_demo.tar.gz
 		3. tar -zxvf ebay_train_demo.tar.gz
 		4. cd ..
-		5. nodejs trainDemoMain.js ebay.com traindemo/samples/ebay_train_demo traindemo/samples/ebay_testing_demo > log
+		5. nodejs trainDemoMain.js ebay.com samples/ebay_train_demo samples/ebay_testing_demo > log
 	Output:
 		./log : execution log file.
 		./templates/ : generated templates will be placed in this directory. In CSPAutoGen, templates will be stored in database, instead of regular files.

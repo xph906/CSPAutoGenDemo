@@ -41,8 +41,8 @@
                                 "CSPValue": "welcomeMsg",
                                 "CSPIndex": 0,
                                 "CSPType": {
-                                    "type": "regexp",
-                                    "value": "^[\\w\\d\\s_\\-\\,]*$"
+                                    "type": "const",
+                                    "value": "welcomeMsg"
                                 }
                             }
                         ],
@@ -75,8 +75,8 @@
                             "CSPValue": "Your balance is $",
                             "CSPIndex": 1,
                             "CSPType": {
-                                "type": "regexp",
-                                "value": "^Your balance is \\$(.)*$"
+                                "type": "const",
+                                "value": "Your balance is $"
                             }
                         },
                         "right": {
@@ -98,8 +98,8 @@
                         "CSPValue": ".",
                         "CSPIndex": 2,
                         "CSPType": {
-                            "type": "regexp",
-                            "value": "^\\.(.)*$"
+                            "type": "const",
+                            "value": "."
                         }
                     },
                     "CSPTag": "BinaryExpression",

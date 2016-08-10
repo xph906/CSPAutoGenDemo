@@ -1035,7 +1035,7 @@
                                                                     "CSPIndex": 18,
                                                                     "CSPType": {
                                                                         "type": "regexp",
-                                                                        "value": "^document\\.getElementById\\(\"welcomeMsg\"\\)\\.innerHTML\\+=\"Your balance is \\$\"\\+balance\\+'\\.'(.)*$"
+                                                                        "value": "^document\\.getElementById\\([\\w\\d\\s_\\-\\,\\.\\(\"\\)\\+=\\$']*\\+'\\.'$"
                                                                     }
                                                                 }
                                                             ],

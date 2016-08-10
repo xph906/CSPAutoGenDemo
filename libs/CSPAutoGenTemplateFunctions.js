@@ -142,7 +142,7 @@ var CSPAutoGenTemplateFunctions = function(){
 				for(var k in valueElem){
 					count++;
 					if(! (k in typeElem.type)){
-						console.log("NOTMATCHING: missing key: "+k+ " vs "+
+						console.log("NONMATCHING: missing key: "+k+ " vs "+
 							util.inspect(Object.keys(typeElem.type) ));
 						return false;
 					}
@@ -176,12 +176,12 @@ var CSPAutoGenTemplateFunctions = function(){
     			return true;
   			}
   			else{
-    			console.log("Nonmatch: type!");
+    			console.log("Nonmatch: type");
     			return false;
   			}
 		}
 		else{
-  			console.log("Nonmatch: tree!");
+  			console.log("Nonmatch: tree");
   			return false;
 		}
 		return true;
@@ -450,7 +450,7 @@ var CSPAutoGenTemplateFunctions = function(){
 	    var nodehash = toolSet.generateGASTHash(node);
 	    var rs = genSymTemplateNode(node, nodehash, null, templates);
 	    for(var funName in rs){
-				console.log("DEBUG: generated auxiliary function "+funName+" for expression "+node.type);
+			//	console.log("DEBUG: generated auxiliary function "+funName+" for expression "+node.type);
 	    	elems[funName] = rs[funName];
 	    }
 	  }
@@ -596,7 +596,7 @@ var CSPAutoGenTemplateFunctions = function(){
 	      }
 	      else if(toolSet.isEvalCallNode(node)){
 	      		var evalGAST = toolSet.generateGAST(node['CSPValue']);
-	      		console.log("EVAL NODE: "+toolSet.generateGASTHash(evalGAST)+" "+escodegen.generate(evalGAST));
+	      		//console.log("EVAL NODE: "+toolSet.generateGASTHash(evalGAST)+" "+escodegen.generate(evalGAST));
 	        	var evalTemplate = toolSet.findTemplate(evalGAST, templates);
 	        	if(!evalTemplate){
 	        		console.log("error: cannot find eval template.");
@@ -607,15 +607,13 @@ var CSPAutoGenTemplateFunctions = function(){
 	        		var evalFunArgs = [];
 		        	var hash = toolSet.generateGASTHash(evalTemplate);
 		        	//evalTemplate = toolSet.cloneGAST(evalTemplate);
-		        	console.log("GAST EVAL  : "+hash+" "+escodegen.generate(evalTemplate));
 		        	evalTemplate = toolSet.cloneGAST(evalTemplate);
 		        	var newEvalFuns = genSymTemplateNode(evalTemplate, hash, evalFunArgs, templates);
-		        	console.log("GAST EVAL2 : "+hash+" "+escodegen.generate(toolSet.findTemplate(evalGAST, templates)));
-
+		        	
 		        	var evalMainFunName = generateSymbolicTemplateName(evalTemplate, hash);
 		        	node['callee']['name'] = evalMainFunName;
 		        	node['arguments'] = [];
-		        	console.log("  EVAL ARG: "+util.inspect(evalFunArgs));
+		        	//console.log("  EVAL ARG: "+util.inspect(evalFunArgs));
 		        	for(var i=0; i<evalFunArgs.length; i++){
 		        		var firstDigit = evalFunArgs[i].match(/\d/);
 		        		var firstDigitIndex = evalFunArgs[i].indexOf(firstDigit);
@@ -710,7 +708,7 @@ var CSPAutoGenTemplateFunctions = function(){
 	        if(!found){
 	        	
 	        	console.log("error: shouldn't be here: "+node.CSPTag+" || "+util.inspect(node)+"  === "+parent['arguments']+" "+node.CSPTag);
-	        	console.log("code: "+escodegen.generate(parent) );
+	        	//console.log("code: "+escodegen.generate(parent) );
 	        	
 		      //if code reaches here
 		      //needs futher testing for those nodes with arguments,
@@ -745,8 +743,8 @@ var CSPAutoGenTemplateFunctions = function(){
 	  }
 	  
 	  if(programNode === null) {
-	    console.log("warning: cannot find program node. should be from a complex data node");
-	    console.log("warning: generate scripts without program node and add return statement.");
+	    //console.log("warning: cannot find program node. should be from a complex data node");
+	    //console.log("warning: generate scripts without program node and add return statement.");
 	    //TODO: for such nodes, we don't add function assignment nodes.
 	    // not sure if this is the right decision, needs further confirmation.
 	    var returnNode = toolSet.genReturnNode(template);

@@ -36,11 +36,11 @@ for(var hash in symTemplates){
     templates[hash].body[0].declarations[0].id.name === "CSPAutoGenGeneratedFunction" ){
    
     curSymTemplateStrs = templateHandlers.genSymTemplateStr(symTemplates[hash], symTemplates, "CSPAutoGenGeneratedFunction");
-    console.log("created a symbolic template for Function.");
+    //console.log("created a symbolic template for Function.");
   }
   else{
     curSymTemplateStrs = templateHandlers.genSymTemplateStr(symTemplates[hash], symTemplates);
-    console.log("created a symbolic template");
+    //console.log("created a symbolic template");
   }
   
   if(!curSymTemplateStrs){
@@ -52,7 +52,7 @@ for(var hash in symTemplates){
 }
 
 var symbolicTemplates = {};
-console.log("start to store symbolic templates:");
+//console.log("start to store symbolic templates:");
 toolSet.storeSymbolicTemplatesAsJSFile(symTemplateStrs, config.symbolicTemplateJSFileName);
 
 

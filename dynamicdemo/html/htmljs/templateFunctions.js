@@ -39,7 +39,7 @@ var CSPAutoGenTemplateFunctions = function(){
 				for(var k in valueElem){
 					count++;
 					if(! (k in typeElem.type)){
-						console.log("NOTMATCHING: missing key: "+k+ " vs "+
+						console.log("NONMATCHING: missing key: "+k+ " vs "+
 							util.inspect(Object.keys(typeElem.type) ));
 						return false;
 					}
@@ -73,12 +73,12 @@ var CSPAutoGenTemplateFunctions = function(){
     			return true;
   			}
   			else{
-    			console.log("Nonmatch: type!");
+    			console.log("NONMATCHING: type!");
     			return false;
   			}
 		}
 		else{
-  			console.log("Nonmatch: tree!");
+  			console.log("NONMATCHING: tree!");
   			return false;
 		}
 		return true;
@@ -95,12 +95,12 @@ var CSPAutoGenTemplateFunctions = function(){
     			return true;
   			}
   			else{
-    			console.log("Nonmatch: type!");
+    			console.log("NONMATCHING: type!");
     			return false;
   			}
 		}
 		else{
-  			console.log("Nonmatch: tree!");
+  			console.log("NONMATCHING: tree!");
   			return false;
 		}
 		return true;

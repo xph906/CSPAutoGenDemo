@@ -30,7 +30,7 @@ var CSPRuntimeFunctions = function(){
 	  	}
 	  }
 	  else{
-	  	console.log("failed find template tree.");
+	  	console.log("failed finding template tree.");
 	  }
 	  return null;
 	};
@@ -65,7 +65,6 @@ var CSPRuntimeFunctions = function(){
 					args.push(Boolean(node.value));
 				}
 				else if(toolSet.isEvalCallNode(node)){
-					console.log("ISEVALCALL: "+node)
 					var evalGAST = toolSet.generateGAST(node.arguments[0].value.toString());
 					var evalArgs = extractParametersForSymbolicTemplate(evalGAST);
 					args = args.concat(evalArgs);
@@ -157,7 +156,6 @@ var CSPRuntimeFunctions = function(){
 		var scripts = "var CSPAutoGenGeneratedFunction = function("+title+"){";
 		scripts += body;
 		scripts += "}";
-		console.log("SAFEFunction:"+scripts);
 
 		var newArgs = [];
 		var symbolicTemplate = processDynamicScripts(scripts, newArgs, 
@@ -212,7 +210,6 @@ var CSPRuntimeFunctions = function(){
 		if(args){
 			for(var key in args){
 				outArgs.push(args[key]);
-				console.log("ARGS: "+key+" => "+args[key]);
 			}
 		}
 		console.log("Found symbolic template: "+util.inspect(symbolicTemplate))
@@ -296,7 +293,7 @@ var CSPRuntimeFunctions = function(){
 						var script = node.innerHTML.trim();
 						if (script.length === 0)
 							continue;
-						console.log("Found runtime-included inline scripts.");
+						console.log("found runtime-included inline scripts.");
 						console.log(script);
 						runtimeInlineScriptHandler(script, node);
 					}
@@ -309,7 +306,6 @@ var CSPRuntimeFunctions = function(){
 	});
 
 	var onDomContentLoadedEventHandler = function(e){
-		console.log("DOMContentLoaded event is fired");
 		runtimeInlineScriptObserver.observe(document, runtimeInlineScriptObserverOptions);
 
 	};
@@ -495,13 +491,10 @@ var CSPRuntimeFunctions = function(){
           	return ;
           }
           var args = extractParametersForSymbolicTemplate(elem);
-          console.log("FUN : "+funName)
-          console.log("ARGS: "+util.inspect(args)+" "+util.inspect(elem) );
           var idVal = this[funName].apply(this,args);
           object[JSkeyname] = idVal;
         }
       }
-      console.log("extracted object: "+util.inspect(object));
       return object;
 	  };
 	  
@@ -531,7 +524,7 @@ var CSPRuntimeFunctions = function(){
 			//console.log(" imported symbolic template: "+hash);
 		}
 	}
-	console.log("Imported "+count+" symbolic templates.");
+	console.log("imported "+count+" symbolic templates.");
 
   	window.eval = safeEval;
   	var originalSetInterval = window.setInterval;

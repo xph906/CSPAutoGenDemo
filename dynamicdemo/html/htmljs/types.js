@@ -367,7 +367,7 @@ var CSPAutoGenType = function(){
 			}
 			if(matchType({type:"complex", value: domains}, targetObj))
 				return true;
-			console.log("NOTMATCHING: insufficient: "+targetObj+" VS "+util.inspect(typeObj.value));
+			console.log("NONMATCHING: insufficient: "+targetObj+" VS "+util.inspect(typeObj.value));
 			for(var i in typeObj.value){
 				var d = typeObj.value[i].toString();
 				console.log("  "+d+" len:"+d.length);
@@ -380,7 +380,7 @@ var CSPAutoGenType = function(){
 				return true;
 			}
 			else {
-				console.log("NOTMATCHING: const:"+targetObj.toString()+" VS "+d+" len:"+d.length);
+				console.log("NONMATCHING: const:"+targetObj.toString()+" VS "+d+" len:"+d.length);
 				return false;
 			}
 		}
@@ -392,7 +392,7 @@ var CSPAutoGenType = function(){
 					return true;
 				//console.log("Failed matching: "+d+" "+d.length+" VS "+targetObj.toString()+" "+targetObj.toString().length)
 			}
-			console.log("NOTMATCHING: enum:"+targetObj+" VS "+util.inspect(typeObj.value));
+			console.log("NONMATCHING: enum:"+targetObj+" VS "+util.inspect(typeObj.value));
 			for(var i in typeObj.value){
 				var d = typeObj.value[i].toString();
 				console.log("  "+d+" len:"+d.length);
@@ -408,26 +408,26 @@ var CSPAutoGenType = function(){
 				(!isNaN(targetObj.replace(/,/g, ''))) )
 					return true;
 			else{
-				console.log("NOTMATCHING: number:"+targetObj);
+				console.log("NONMATCHING: number:"+targetObj);
 				return false;
 			}
 		}
 		else if(typeObj.type === "url"){
 			var o = urlTool.parse(targetObj.toString());
 			if(o.protocol == null){
-				console.log("NOTMATCHING: url:"+targetObj);
+				console.log("NONMATCHING: url:"+targetObj);
 				return false;
 			}
 			o = parseDomain(targetObj.toString());
 			if(o==null){
-				console.log("NOTMATCHING: url:"+targetObj);
+				console.log("NONMATCHING: url:"+targetObj);
 				return false;
 			}
 			var domain = o.domain+'.'+o.tld;
 			if(domain in typeObj.value)
 				return true;
 			else{
-				console.log("NOTMATCHING: url:"+domain+" "+util.inspect(typeObj.value));
+				console.log("NONMATCHING: url:"+domain+" "+util.inspect(typeObj.value));
 				return false;
 			}
 		}
@@ -438,12 +438,12 @@ var CSPAutoGenType = function(){
 					return true;
 				}
 				else{
-					console.log("NOTMATCHING: gast:"+hash+" VS "+util.inspect(typeObj.value) );
+					console.log("NONMATCHING: gast:"+hash+" VS "+util.inspect(typeObj.value) );
 					return false;
 				}
 			}
 			catch(e){
-				console.log("NOTMATCHING: gast (e):"+targetObj+" VS "+util.inspect(typeObj.value) +" "+e);
+				console.log("NONMATCHING: gast (e):"+targetObj+" VS "+util.inspect(typeObj.value) +" "+e);
 				return false;
 			}
 		}
@@ -462,26 +462,26 @@ var CSPAutoGenType = function(){
 				try{
 					var o = urlTool.parse(d);
 					if(o.protocol == null){
-						console.log("NOTMATCHING: complex: "+d+" 2");
+						console.log("NONMATCHING: complex: "+d+" 2");
 						return false;
 					} 
 					o = parseDomain(d);
 					if(o == null){
-						console.log("NOTMATCHING: complex: "+d+" 3");
+						console.log("NONMATCHING: complex: "+d+" 3");
 						return false;
 					} 
 					var k = o.domain+'.'+o.tld;
 					if(k in typeObj.value)
 						return true;
-					console.log("NOTMATCHING: complex: "+d+" 4");
+					console.log("NONMATCHING: complex: "+d+" 4");
 					return false;
 				}
 				catch(e){
-					console.log("NOTMATCHING: complex: "+d+" 5");
+					console.log("NONMATCHING: complex: "+d+" 5");
 					return false;
 				}
 			}
-			console.log("NOTMATCHING: complex: "+d+" 6");
+			console.log("NONMATCHING: complex: "+d+" 6");
 			return false;
 		}
 		else if(typeObj.type === "regexp"){
@@ -489,7 +489,7 @@ var CSPAutoGenType = function(){
 			if(typeObj.value.test(targetObj.toString()))
 				return true;
 			else{
-				console.log("NOTMATCHING: regexp:"+targetObj+" VS "+typeObj.value.toString() );
+				console.log("NONMATCHING: regexp:"+targetObj+" VS "+typeObj.value.toString() );
 				return false;
 			}
 		}
@@ -498,11 +498,11 @@ var CSPAutoGenType = function(){
 				return true;
 			else if(targetObj=="true" || targetObj=="false")
 				return false;
-			console.log("NOTMATCHING: boolean:"+targetObj);
+			console.log("NONMATCHING: boolean:"+targetObj);
 			return false;
 		}
 		else{
-			console.log("NOTMATCHING: unknown type:"+targetObj+" "+util.inspect(typeObj));
+			console.log("NONMATCHING: unknown type:"+targetObj+" "+util.inspect(typeObj));
 			return false;
 		}
 

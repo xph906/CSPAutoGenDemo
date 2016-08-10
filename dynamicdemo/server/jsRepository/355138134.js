@@ -1,7 +1,7 @@
-var baseMsg = 'Hello ';
+var baseMsg = 'Good Morning ';
 var username = 'John Wayne1';
-var age = 23;
-var mj = 'Computer Science';
+var age = 33;
+var mj = 'Biology';
 var magicNumber = age % 4;
 document.getElementById('welcomeMsg').innerHTML = baseMsg + username + '!<br>';
 var specialChar = [

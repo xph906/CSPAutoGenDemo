@@ -57,7 +57,7 @@ app.post('/js-factory', cors(corsOptions), function(req, res, next){
         success: false, 
         message: 'cannot find template.'
       }); 
-      console.log("cannot find template1.");
+      console.log("cannot find template.");
       return ;
     }
     else{
@@ -69,7 +69,7 @@ app.post('/js-factory', cors(corsOptions), function(req, res, next){
         success: false, 
         message: 'cannot find template.'
       }); 
-      console.log("cannot find template2.");
+      console.log("cannot find template.");
       return ;
     }
     gast = templateFuns.modifyGASTForEvalKeyword(gast, templates);

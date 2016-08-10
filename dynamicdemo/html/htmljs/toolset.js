@@ -50,14 +50,10 @@ var CSPAutoGenToolSet = function(){
 						if(values) 
 							values[dataCount] = node['CSPValue'];
 						dataCount++;
-						if(Array.isArray(node['CSPValue'])){
-							console.log("ATT is ARRAY: "+util.inspect(node));
-						}
+						
 						//console.log("DEBUG typeof: "+(typeof node['CSPValue']));
 					}
-					else if(subtype === null){
-						console.log("literalNode type is null!");
-					}
+					
 					//console.log(debugSpace+ "Literal:"+subtype+" "+node.value);      
 				}
 				else if(isIdentifierNode(node)){
@@ -116,7 +112,6 @@ var CSPAutoGenToolSet = function(){
 	      if(node.CSPTag === "regexp"){
 	      	var found = false;
 	      	var raw = node.raw;
-	      	console.log("RGEXP: "+raw+"==="+util.inspect(node));
 	      	var firstArg = raw.substr(1,raw.lastIndexOf('/')-1);
 	      	var secondArg = raw.substr(raw.lastIndexOf('/')+1);
 	      	for(var k in parent){
@@ -124,7 +119,7 @@ var CSPAutoGenToolSet = function(){
 	      			found = true;
 	      			parent[k] = genNewRegExpNode(firstArg, secondArg);
 	      			parent[k].CSPTag == "regexp";
-	      			console.log("ReplacedRegExpNode: "+util.inspect(parent[k]));
+	      			
 	      		}
 	      	}
 	      	if(!found && parent['arguments']){
@@ -226,7 +221,7 @@ var CSPAutoGenToolSet = function(){
 		      if(template[i].type === "regexp"){
 		    	var tmp = template[i].value.toString();
 		    	template[i].value = new RegExp(template[i].value);
-		    	console.log("DEBUG recover regexp1: "+ template[i].value+" VS "+tmp);
+		    	
 		      }
 		    }
 		    else if(typeof template[i].type === "object"){
@@ -234,7 +229,7 @@ var CSPAutoGenToolSet = function(){
 		        if (template[i].type[k] === "regexp"){
 		          var tmp = template[i].value[k].toString();
 		          template[i].value[k] = new RegExp(template[i].value[k]);
-		          console.log("DEBUG recover regexp2: "+ template[i].value[k]+" VS "+tmp);
+		          
 		        }
 		      }
 		    }
@@ -575,7 +570,7 @@ var CSPAutoGenToolSet = function(){
 		else if (node.type===esprima.Syntax.NewExpression &&
 			node.callee && 
 			node.callee.name==="RegExp" ) {
-			console.log("A RegExp Node!");
+			
 			return true;
 		}
 		return false;
