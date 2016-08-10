@@ -1,0 +1,138 @@
+<html>
+	<meta http-equiv="Content-Security-Policy" content="script-src 'self' *.cs.northwestern.edu localhost:8880"> 
+	<head>
+		<title>CSPAutoGen Handling Dynamic Script DEMO</title>
+		<script src="htmljs/esprima.js"></script>
+		<script src="htmljs/escodegen.browser.js"></script>
+		<script src="htmljs/estraverse.browser.js"></script>
+		<script src="htmljs/deep-diff-0.3.1.min.js"></script>
+    <script src="htmljs/util.js"></script>
+    <script src="htmljs/tld.js"></script>
+		<script src="htmljs/url.js"></script>
+
+    <script src="htmljs/toolset.js"></script>
+
+    <script src="htmljs/types.js"></script>
+		<script src="htmljs/templateFunctions.js"></script>
+
+		<script src="htmljs/templates.js"></script>
+		<script src="htmljs/symtemplates.js"></script>
+		<script src="htmljs/runtime.js"></script>
+		
+		
+		<link rel="stylesheet" href="resources/styles.css">
+		<script src="htmljs/highlight.pack.js"></script>
+		<script src="htmljs/jquery-3.1.0.min.js"></script>
+		<script src='htmljs/init.js'></script>
+		<style>
+			td.one {
+    		border-style: dashed;
+    		border-radius: 5px;
+    		border-width: 1px;
+			}
+			hr.one {
+    		border: 0;
+    		height: 0;
+    		border-top: 1px solid rgba(0, 0, 0, 0.1);
+    		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+			}
+			button.small{
+				font-size: 60%;
+			}
+		</style>
+	</head>
+	<body align="center">
+		<h2>DEMO: CSPAutoGen Processing Dynamic and Runtime-included Scripts</h2>
+		<h3>The page is configured with CSP policy: <code>script-src 'self' *.cs.northwestern.edu</code>.</h3>
+		<h4>Inline scripts, eval and eval-like functions (<code>eval, setTimeout, setInterval, Function</code>) are disabled.</h4>
+		<div align="center">
+    	
+      <hr width="1000">
+      <table border=0 width="1000">
+      	<tr>    
+        	<td>Username: <input type="text" id="username" value="John Wayne"></td>
+        	<td>Age: <input type="number" id="age" size="20" value="25"></td>  
+        	<td>
+        		GreetingMessage:
+        		<select id="wmsg">
+  						<option value="Welcome">Welcome</option>
+  						<option value="Hello">Hello</option>
+  						<option value="Good Morning">Good Morning</option>
+  						<option value="How are you">How are you</option>
+						</select>
+        	</td> 
+        	<td>
+        		Major:
+        		<select id="major">
+  						<option value="Computer Science">Computer Science</option>
+  						<option value="Biology">Biology</option>
+  						<option value="Civil Engineering">Civil Engineering</option>
+  						<option value="Law">Law</option>
+						</select>
+        	</td> 
+        	    
+      	</tr>
+
+    	</table>
+    	<hr width="1000" class="one">
+    	<table width="1000" align="center">
+    		<tr width="1000">
+      		<td width="170"><button type="button" id="evalbutton" >Do Eval Demo!</button></td>
+      		<td width="170"><button type="button" id="settimeoutbutton">Do setTimeout Demo!</button></td>
+      		<td width="170"><button type="button" id="setintervalbutton">Do setInterval Demo!</button></td>
+      		<td width="170"><button type="button" id="functionbutton">Do Function Demo!</button></td>
+      		<td width="300"><button type="button" id="runtimeincludedbutton">Runtime-included Inline Script Demo!</button></td>
+      	</tr>
+    	</table>
+    	<hr width="1000">
+    	<table border=0 width="1000">
+    		<tr>
+    			<td width="700">
+		    		<div ><font size="3" color="white">Execute the following code:</font><br></div>
+		    	</td>	
+    			<td width="300">
+		    		<div ><font size="3" color="white">Execution results:</font><br></div>
+		    	</td>	
+    		</tr>
+    	</table>
+    	<table border=0  width="1000">
+    		<tr>
+    			<td class='one' width="700">
+		    		<div >
+		    		<code id="evalcode"></code>
+		    		</div>
+		    	</td>	
+    			<td class='one' width="300">
+		    		<div id="welcomeMsg"><br></div>
+		    	</td>	
+    		</tr>
+    	</table>
+    	<table border=0  width="1000">
+    		<tr>
+    			<td  width="1000">
+		    		<div width="1000" id='samplegroup'>
+		    			<font size="3" color="white" id='sampletitle'>Related symbolic templates:</font>
+		    			<br>
+		    		</div>
+		    	</td>	
+    		</tr>
+    		<tr id="details">
+    			<td class='one' width="700">
+	    			<div >
+			    		<code id="symtemplatecode">
+			    			
+			    		</code>
+			    	</div>
+		    	</td>
+    		</tr>
+    	</table>
+    </div>
+
+	  <script src='htmljs/evaldemo.js'></script>
+	  <script src='htmljs/settimeoutdemo.js'></script>
+	  <script src='htmljs/setintervaldemo.js'></script>
+	  <script src='htmljs/functiondemo.js'></script>
+	  <script src='htmljs/runtimeinline.js'></script>
+	  <script id='testscript' src='htmljs/test.js'></script>
+	</body>
+</html>

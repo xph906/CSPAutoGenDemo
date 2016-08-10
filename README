@@ -1,0 +1,31 @@
+CSPAutoGen Demo Project.
+
+This project aims to demonstrate CSPAutoGen's functionality. It includes the essential codes of CSPAutoGen and helps understand the paper. The demo is composed of two parts: (1). template training and matching demo; and (2). dynamic and runtime-included scripts handling demo. This demo project has not been officially finished and more documents and code comments will be released. Code refactoring is also required.
+
+1. Template training and matching demo. This demo shows using the scripts extracted from 2000 webpages of ebay.com (stored at traindemo/samples/ebay_train_demo.tar.gz) to generate templates and then use those templates to match scripts extracted from another 500 webpages of ebay.com (stored at traindemo/samples/ebay_test_demo.tar.gz).
+	Usage:
+		1. cd traindemo/samples
+		2. tar -zxvf ebay_testing_demo.tar.gz
+		3. tar -zxvf ebay_train_demo.tar.gz
+		4. cd ..
+		5. nodejs trainDemoMain.js ebay.com traindemo/samples/ebay_train_demo traindemo/samples/ebay_testing_demo > log
+	Output:
+		./log : execution log file.
+		./templates/ : generated templates will be placed in this directory. In CSPAutoGen, templates will be stored in database, instead of regular files.
+		./failedscripts/ : failed matching templates will be stored at this directory.
+
+2.  Dynamic and runtime-included scripts handling demo: this demo shows when a page is configured with the strictest CSP ruless (i.e., disabling eval and eval-like functions as well as inline scripts), how CSPAutoGen allows those disabled but benign scripts to be executed.
+	Usage: 
+		1. cd dynamicdemo 
+		2. node generateTemplates.js
+		3. cp output/templates/localhost/* server/templates/
+		4. cp output/symtemplates.js html/htmljs/
+		5. cp output/templates.js html/htmljs/
+		6. cd ..
+		7. cp -r ./html ${yourServerDirection}/cspautogen
+		8. cd ./server
+		9. node localServer.js
+		10. open http://localhost/cspautogen3/DynamicScriptsDemo.html webpage.
+
+
+	
